@@ -1,0 +1,14 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [
+    {
+      "path": "/Northwind",
+      "target": {
+        "type": "destination",
+        "name": "Northwind",
+        "entryPath": "/V2/Northwind/Northwind.svc"
+      },
+      "description": "Northwind"
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+<mvc:View
+	controllerName="sap.ui.demo.walkthrough.controller.InvoiceList"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Panel accessibleRole="Region">
+		<headerToolbar>
+			<Toolbar>
+				<Title text="{i18n>invoiceListTitle}"/>
+				<ToolbarSpacer/>
+				<SearchField
+					width="50%"
+					search=".onFilterInvoices"
+					ariaLabelledBy="searchFieldLabel"
+					ariaDescribedBy="searchFieldDescription"
+					placeholder="{i18n>searchFieldPlaceholder}"/>
+			</Toolbar>
+		</headerToolbar>
+	<Table
+		id="invoiceList"
+		headerText="{i18n>invoiceListTitle}"
+		class="sapUiResponsiveMargin"
+		width="auto"
+		items="{
+	         path : 'invoice>/',
+	         sorter : {
+	         
+		         path : 'Discontinued',
+		         group : false
+	         
+	         }
+	      }">
+		<columns>
+			<Column
+				hAlign="End"
+				minScreenWidth="Small"
+				demandPopin="true"
+				width="4em">
+				<Text text="{i18n>columnId}"/>
+			</Column>
+			<Column>
+				<Text text="{i18n>columnName}"/>
+			</Column>
+			<Column
+				minScreenWidth="Small"
+				demandPopin="true">
+				<Text text="{i18n>columnStatus}"/>
+			</Column>
+			<Column
+				minScreenWidth="Tablet"
+				demandPopin="false">
+				<Text text="{i18n>columnOrders}"/>
+			</Column>
+			<Column
+				hAlign="End">
+				<Text text="{i18n>columnPrice}"/>
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem
+				type="Navigation"
+				press=".onPress">
+				<cells>
+					<ObjectNumber number="{invoice>ProductID}" emphasized="false"/>
+					<ObjectIdentifier title="{invoice>ProductName}"/>
+					<Text 
+					text="{=${invoice>Discontinued} === true ? 'Discontinued' : 'In Production' }"
+					state="{=${invoice>Discontinued} === true ? 'Error' : 'Success' }"/>
+					<Text text="{invoice>UnitsOnOrder}"/>
+					<ObjectNumber
+						number="{
+							parts: [{path: 'invoice>UnitPrice'}, {path: 'view>/currency'}],
+							type: 'sap.ui.model.type.Currency',
+							formatOptions: {
+								showMeasure: false
+							}
+						}"
+						unit="{view>/currency}"
+						state="{=${invoice>Discontinued} === true ? 'Error' : 'Success' }"/>
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+	</Panel>
+</mvc:View>
