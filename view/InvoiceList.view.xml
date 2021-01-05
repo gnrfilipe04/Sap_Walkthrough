@@ -43,12 +43,12 @@
 			<Column
 				minScreenWidth="Small"
 				demandPopin="true">
-				<Text text="{i18n>columnStatus}"/>
+				<Text text="{i18n>columnOrders}"/>
 			</Column>
 			<Column
 				minScreenWidth="Tablet"
 				demandPopin="false">
-				<Text text="{i18n>columnOrders}"/>
+				<Text text="{i18n>columnStatus}"/>
 			</Column>
 			<Column
 				hAlign="End">
@@ -62,10 +62,10 @@
 				<cells>
 					<ObjectNumber number="{invoice>ProductID}" emphasized="false"/>
 					<ObjectIdentifier title="{invoice>ProductName}"/>
+					<Text text="{invoice>UnitsOnOrder}"/>
 					<Text 
 					text="{=${invoice>Discontinued} === true ? 'Discontinued' : 'In Production' }"
 					state="{=${invoice>Discontinued} === true ? 'Error' : 'Success' }"/>
-					<Text text="{invoice>UnitsOnOrder}"/>
 					<ObjectNumber
 						number="{
 							parts: [{path: 'invoice>UnitPrice'}, {path: 'view>/currency'}],
